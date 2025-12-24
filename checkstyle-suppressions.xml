@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC
+    "-//Checkstyle//DTD SuppressionFilter Configuration 1.2//EN"
+    "https://checkstyle.org/dtds/suppressions_1_2.dtd">
+<suppressions>
+    <!-- Suppress NoHttp checks for third-party dependencies -->
+    <suppress checks="NoHttp" files=".*\.m2/repository/.*"/>
+    <suppress checks="NoHttp" files=".*target/.*"/>
+    <suppress checks="NoHttp" files=".*\.jar"/>
+    
+    <!-- Suppress for specific dependency POM files -->
+    <suppress checks="NoHttp" files=".*jakarta\.inject-api.*"/>
+    <suppress checks="NoHttp" files=".*jakarta\.annotation-api.*"/>
+    <suppress checks="NoHttp" files=".*picocli.*"/>
+    <suppress checks="NoHttp" files=".*commons-beanutils.*"/>
+    <suppress checks="NoHttp" files=".*commons-collections.*"/>
+</suppressions>
