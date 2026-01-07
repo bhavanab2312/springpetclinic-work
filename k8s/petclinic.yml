@@ -5,11 +5,11 @@ metadata:
   name: petclinic
 spec:
   type: NodePort
+  selector:
+    app: petclinic
   ports:
     - port: 80
       targetPort: 8080
-  selector:
-    app: petclinic
 
 ---
 apiVersion: apps/v1
@@ -40,8 +40,6 @@ spec:
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 5
 
           readinessProbe:
             httpGet:
@@ -49,8 +47,6 @@ spec:
               port: 8080
             initialDelaySeconds: 60
             periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 5
 
           volumeMounts:
             - name: binding
@@ -61,4 +57,3 @@ spec:
         - name: binding
           secret:
             name: demo-db-2
-
