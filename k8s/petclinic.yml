@@ -24,10 +24,6 @@ spec:
         - name: SPRING_PROFILES_ACTIVE
           value: postgres
 
-        volumeMounts:
-        - name: binding
-          mountPath: /bindings/secret
-          readOnly: true
 
         readinessProbe:
           httpGet:
@@ -43,12 +39,7 @@ spec:
           initialDelaySeconds: 60
           periodSeconds: 10
 
-      volumes:
-      - name: binding
-        projected:
-          sources:
-          - secret:
-              name: demo-db
+      
 ---
 apiVersion: v1
 kind: Service
