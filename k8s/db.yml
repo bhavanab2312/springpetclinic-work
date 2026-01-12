@@ -1,8 +1,9 @@
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-db
+  labels:
+    app: demo-db
 spec:
   replicas: 1
   selector:
@@ -14,14 +15,25 @@ spec:
         app: demo-db
     spec:
       containers:
-        - name: postgres
-          image: postgres:15
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_DB
-              value: petclinic
-            - name: POSTGRES_USER
-              value: petclinic
-            - name: POSTGRES_PASSWORD
-              value: petclinic
+      - name: postgres
+        image: postgres:15
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_DB
+          value: petclinic
+        - name: POSTGRES_USER
+          value: petclinic
+        - name: POSTGRES_PASSWORD
+          value: petclinic
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-db
+spec:
+  selector:
+    app: demo-db
+  ports:
+  - port: 5432
+    targetPort: 5432

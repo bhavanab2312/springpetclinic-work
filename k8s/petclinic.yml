@@ -23,7 +23,18 @@ spec:
         env:
         - name: SPRING_PROFILES_ACTIVE
           value: postgres
-
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://demo-db:5432/petclinic
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: demo-db
+              key: username
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: demo-db
+              key: password
 
         readinessProbe:
           httpGet:
@@ -38,8 +49,6 @@ spec:
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 10
-
-      
 ---
 apiVersion: v1
 kind: Service
